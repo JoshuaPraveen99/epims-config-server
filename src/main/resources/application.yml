@@ -1,0 +1,34 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: epims-config-server
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:JoshuaPraveen99/epims-config.git
+          default-label: main
+          clone-on-start: true
+          private-key: ${CONFIG_GIT_PRIVATE_KEY}
+          ignore-local-ssh-settings: true
+          known-hosts-file: ${user.home}/.ssh/known_hosts
+          strict-host-key-checking: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+  endpoint:
+    health:
+      show-details: never
+
+info:
+  app:
+    name: EPIMS Config Server
+    description: Centralized configuration service for EPIMS
+    version: 0.1.0
