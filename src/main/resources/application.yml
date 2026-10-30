@@ -1,9 +1,13 @@
+
 server:
   port: 8888
 
 spring:
   application:
     name: epims-config-server
+
+  config:
+    import: "optional:configtree:/run/secrets/"
 
   cloud:
     config:
@@ -12,9 +16,9 @@ spring:
           uri: git@github.com:JoshuaPraveen99/epims-config.git
           default-label: main
           clone-on-start: true
-          private-key: ${CONFIG_GIT_PRIVATE_KEY}
           ignore-local-ssh-settings: true
-          known-hosts-file: ${user.home}/.ssh/known_hosts
+          private-key: ${CONFIG_GIT_PRIVATE_KEY}
+          known-hosts-file: /run/secrets/known_hosts
           strict-host-key-checking: true
 
 management:
